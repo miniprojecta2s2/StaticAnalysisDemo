@@ -1,53 +1,58 @@
 #include <stdio.h>
 
-// Function 1: adds numbers
-int addNumbers(int a, int b) {
-    return a + b;
+int add(int a, int b) { return a + b; }
+int sub(int a, int b) { return a - b; }
+int mul(int a, int b) { return a * b; }
+int divSafe(int a, int b) {
+    if (b == 0) return 0;
+    return a / b;
 }
 
-// Function 2: subtracts numbers
-int subtractNumbers(int a, int b) {
-    return a - b;
-}
-
-// Duplicate logic to trigger "duplication" warning
-int sumAndPrint(int a, int b) {
-    int sum = a + b;
-    printf("Sum: %d\n", sum);
+// Duplicate logic (Codacy can detect this)
+int calculate1(int a, int b) {
+    int sum = 0;
+    for (int i = 0; i < b; i++) sum += a;
     return sum;
 }
 
-int sumAndPrintAgain(int a, int b) {
-    int sum = a + b; // duplicate logic
-    printf("Sum again: %d\n", sum);
+int calculate2(int a, int b) {  // Duplicate logic
+    int sum = 0;
+    for (int i = 0; i < b; i++) sum += a;
     return sum;
+}
+
+void analyzeArray(int arr[], int size) {
+    int max = arr[0];
+    for (int i = 0; i < size; i++) {
+        if (arr[i] > max)
+            max = arr[i];
+        else if (arr[i] == max)
+            printf("Duplicate max found: %d\n", arr[i]);
+    }
+    printf("Max value: %d\n", max);
 }
 
 int main() {
+    int arr[5] = {1, 2, 3, 4, 5};
+    analyzeArray(arr, 5);
+
     int x = 10, y = 0;
+    printf("Sum: %d\n", add(x, 5));
+    printf("Sub: %d\n", sub(x, 5));
+    printf("Mul: %d\n", mul(x, 5));
+    printf("Div: %d\n", divSafe(x, y));  // Safe division
 
-    // This part will trigger an "error prone" or "division by zero" issue
-    if (y == 0)
-        printf("Warning: Division by zero!\n");
-    else
-        printf("%d\n", x / y);
+    // Conditional chain (adds complexity)
+    if (x > 0)
+        if (x < 10)
+            printf("x is small\n");
+        else if (x == 10)
+            printf("x is exactly 10\n");
+        else
+            printf("x is large\n");
 
-    // Some complexity — nested ifs & loops
-    for (int i = 0; i < 5; i++) {
-        if (i % 2 == 0) {
-            if (i == 2)
-                printf("Middle even number: %d\n", i);
-            else
-                printf("Even number: %d\n", i);
-        } else {
-            printf("Odd number: %d\n", i);
-        }
-    }
-
-    addNumbers(5, 6);
-    subtractNumbers(9, 4);
-    sumAndPrint(3, 4);
-    sumAndPrintAgain(7, 8);
+    calculate1(2, 3);
+    calculate2(2, 3);
 
     return 0;
 }
