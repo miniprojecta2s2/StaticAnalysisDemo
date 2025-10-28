@@ -1,48 +1,53 @@
 #include <stdio.h>
 
-// Duplicate block 1
-void processNumbersA() {
-    int total = 0;
-    for (int i = 0; i < 5; i++) {
-        total += i;
-        if (i % 2 == 0)
-            printf("Even A: %d\n", i);
-        else
-            printf("Odd A: %d\n", i);
-    }
-    printf("Total A = %d\n", total);
+// Function 1: adds numbers
+int addNumbers(int a, int b) {
+    return a + b;
 }
 
-// Duplicate block 2 (almost identical)
-void processNumbersB() {
-    int total = 0;
-    for (int i = 0; i < 5; i++) {
-        total += i;
-        if (i % 2 == 0)
-            printf("Even B: %d\n", i);
-        else
-            printf("Odd B: %d\n", i);
-    }
-    printf("Total B = %d\n", total);
+// Function 2: subtracts numbers
+int subtractNumbers(int a, int b) {
+    return a - b;
 }
 
-// Simple function for extra complexity
-int divide(int x, int y) {
-    if (y == 0) {
-        printf("Division by zero prevented!\n");
-        return 0;
-    } else {
-        return x / y;
-    }
+// Duplicate logic to trigger "duplication" warning
+int sumAndPrint(int a, int b) {
+    int sum = a + b;
+    printf("Sum: %d\n", sum);
+    return sum;
+}
+
+int sumAndPrintAgain(int a, int b) {
+    int sum = a + b; // duplicate logic
+    printf("Sum again: %d\n", sum);
+    return sum;
 }
 
 int main() {
-    int a = 10, b = 0;
-    int result = divide(a, b);
-    printf("Result: %d\n", result);
+    int x = 10, y = 0;
 
-    processNumbersA();
-    processNumbersB();
+    // This part will trigger an "error prone" or "division by zero" issue
+    if (y == 0)
+        printf("Warning: Division by zero!\n");
+    else
+        printf("%d\n", x / y);
+
+    // Some complexity — nested ifs & loops
+    for (int i = 0; i < 5; i++) {
+        if (i % 2 == 0) {
+            if (i == 2)
+                printf("Middle even number: %d\n", i);
+            else
+                printf("Even number: %d\n", i);
+        } else {
+            printf("Odd number: %d\n", i);
+        }
+    }
+
+    addNumbers(5, 6);
+    subtractNumbers(9, 4);
+    sumAndPrint(3, 4);
+    sumAndPrintAgain(7, 8);
 
     return 0;
 }
