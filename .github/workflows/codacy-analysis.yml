@@ -11,9 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Run Codacy Analysis CLI
+      - name: Run Codacy Analysis
         uses: codacy/codacy-analysis-cli-action@v4.3.0
         with:
-          run_quality: true
+          directory: .
+          verbose: true
