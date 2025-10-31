@@ -17,5 +17,6 @@ jobs:
       - name: Run Codacy Analysis
         uses: codacy/codacy-analysis-cli-action@v4.3.0
         with:
-          directory: .
+          directory: ${{ github.workspace }}
+          run-docker-tools: true
           verbose: true
