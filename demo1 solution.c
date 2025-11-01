@@ -1,6 +1,6 @@
 #include <stdio.h>
 int main() {
-    int x = 10, y = 0;
+    int x = 10, y = 1;
 
     if (y != 0) {
         printf("%d", x / y);
