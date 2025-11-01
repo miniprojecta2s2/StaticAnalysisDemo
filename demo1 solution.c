@@ -1,9 +1,12 @@
 #include <stdio.h>
+
 int main() {
-    int x = 10, y = 1;
+    int x, y;
+    printf("Enter two integers (x y): ");
+    scanf("%d %d", &x, &y);
 
     if (y != 0) {
-        printf("%d", x / y);
+        printf("Result: %d\n", x / y);
     } else {
         printf("Cannot divide by zero!\n");
     }
